@@ -3,7 +3,7 @@
 ## 02/April/20
 
 
-###Network service operations [source](https://www.etsi.org/deliver/etsi_gr/NFV-REL/001_099/010/03.01.01_60/gr_NFV-REL010v030101p.pdf)
+###Network service operations [source](https://www.etsi.org/deliver/etsi_gr/NFV-REL/001_099/010/03.01.01_60/gr_NFV-REL010v030101p.pdf)###
 
 - Resilency Operations:
 	- **Scaling**, i.e. the dynamic provisioning or deprovisioning of resources granted to VNFs;
