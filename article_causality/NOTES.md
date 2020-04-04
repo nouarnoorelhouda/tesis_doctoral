@@ -98,7 +98,7 @@ Figure 1. Composite NS and nested NSs example. In this example, the two constitu
 
 Figure 2. NSs hierarchy provided using multiple administrative domains.
 
-####NFVO-Roles
+#### NFVO-Roles
 
 A single NFVO can play both provider consumer role. The VNFMs in each administrative domain interact with the NFVO (either NFVO-1 or NFVO-2) of the same administrative domain. NFVO-1 is not aware of the constituent VNF instances of the nested NS instance, and hence NFVO-1 does not interact with the VNFMs in the administrative domain of NFVO-2.
 
