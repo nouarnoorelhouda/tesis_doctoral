@@ -113,6 +113,54 @@ Fig 3. Composite NS scaling in sharing scenario.  It is possible that scaling on
 
 When the NFVO-* checks the NS consistency  (e.g. dependency between the nested NS instance and other constituent of the composite NS instance it manages) which might be impacted by the nested NS scaling operation. If the composite NS consistency is guaranteed by this scaling operation, then NFVO-i approves the grant request. Otherwise, NFVO-i rejects the grant request.
 
+## 05/April/20
+
+### Management of Stateful NSs and VNFs [source](http:www.google.com)
+
+- The threats are twofold:
+- VNFs and NSs inconsistencies after recovery.
+	- Provide mechanisms to guarantee the correct state synchronisation of VNFs and NSs.
+- VNFs and NSs extended downtime due to synchronisation problem.
+	- Provide support and solution in case of detecting inconsistencies.
+Timing failures when the NFVO respond to a request out of time, generating inconsistencies.
+
+Values failures when the NFVO set the wrong value in the NFV system. 
+
+### Verification of NFV Services:
+
+Check the consistency and safety of network service configurations on virtual and physical resources.
+
+Network and service properties to be checked.
+
+- Properties:
+	- **Dependencies of Network Service Components:**
+		- In this case, there is inconsistency between states stored and managed in VNF FGs and network tables (e.g., OpenFlow flow tables), due to communication delays and/or configuration errors. , if a VNF is replicated into the other same one for the purpose of load balance and a new FG is established through the copied one, but all the state/DBs replication is not finished yet due to delays, this can be lead to unexpected behaviors or errors of the network service. 
+	- **Loop-Free in VNF FGs:**
+		- In VNF FGs, a loop construction should be avoided and verified. The forwarding path over VNF FG should be checked in advance with the consideration of physical placement of VNF among NFVIs.
+	- **Policy and State Consistency:**
+		- Load balancing among the VNF instances is one of the most important considerations. the status in resource usage of each service node can be different and thus appropriate amount of jobs should be distributed to the VNF instances. Moreover, when VNF instances locate in physically different service nodes, simple verification of load balancing in terms of resource usage is not sufficient because different service nodes experience diverse network conditions (e.g., different levels of network congestion). 
+	- **Load Balancing and Optimization among VNF Instances:**
+		- In VNF FG, policy to specific users can be dynamically changed. For example, a DPI VNF can be applied only in the daytime in order to prohibit from watching adult contents while no DPI VNFs applied during the nighttime. When the policy is changed, the changed policy should be reconfigured in VNF service nodes as soon as possible. If the reconfiguration procedure is delayed, inconsistent policies may exist in service nodes. Consequently, policy inconsistency or confliction needs to be checked
+	- **Performance Bottleneck:**
+		- In  VNF FG, VNF instances can locate in different service nodes and these service nodes have different load status and network conditions. Consequently, the overall throughput of VNF FG is severely affected by the service nodes running VNF instances. For example, if a VNF instance locates in a heavily loaded service node, the service time at the service node will be increased. n addition, when a VNF FG includes a bottleneck link with network congestion, the end-to-end performance (e.g., latency and throughput) in the VNF FG. After detecting the bottleneck link/node, the VNF requiring scale up or down can be identified and the relocation of VNF instance among service nodes can be determined.
+	- **Security Hole:**
+		- In terms of security services, authentication, data integrity, confidentiality, and replay protection should be provided. In these environments, it is difficult to protect the integrity of flows traversing such VNFs.
+
+### NFV vs. SDN [source](https://datatracker.ietf.org/meeting/92/materials/slides-92-nfvrg-3)
+
+| NFV context (Service-level)        | SDN context (Network-level) | 
+| ------------- |:-------------:| 
+| Dependency of network service components (e.g., network controller vs. VNF/resource manager/orchestrator)      | No blackhole (e.g., no packet loss) | 
+| Loop-free in VNF FGs (aka. service chains)  | Loop-free (e.g, routing switching)      | 
+| Load balancing and optimization in VNF FGs (aka. service chains) |Flow table rule consistency between multiple applications (E.g., OpenFlow)|
+| Policy and state consistency (e.g., end-toend context, virtual vs. physical resource, etc.) | Dynamic info/statistics consistency (e.g., flow, port, QoS, etc.) |
+| Performance | Consistency with legacy L2/L3 protocols (e.g., STP)      |
+| Security (L4-L7) | Security (L3 firewall, etc.)  |
+
+### Split brain problem [source](http://arc.encs.concordia.ca/papers/NFVInconsistencyCloudCom.pdf)
+
+Despite the fact that NFVO is considered as the “brain” of an NFV environment, the other managerial components can operate at each level autonomously, which is referred to as the “split-brain” issue in the literature. However, the lack of synchronization is not intended [31], and it can lead to inconsistencies whenever the states of functional elements managed by two different
+managerial components differ from each other. 
 
 
 
