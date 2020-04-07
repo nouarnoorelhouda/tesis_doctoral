@@ -162,6 +162,15 @@ Network and service properties to be checked.
 Despite the fact that NFVO is considered as the “brain” of an NFV environment, the other managerial components can operate at each level autonomously, which is referred to as the “split-brain” issue in the literature. However, the lack of synchronization is not intended [31], and it can lead to inconsistencies whenever the states of functional elements managed by two different
 managerial components differ from each other. 
 
+## 07/April/2020
+
+### Definitions [source](https://www.etsi.org/deliver/etsi_gs/NFV-IFA/001_099/014/03.03.01_60/gs_nfv-ifa014v030301p.pdf)
+
+**Service Access Point (SAP):** connection point where an NS can be accessed
+
+**Network Service:** A composition of Network Functions (NF) arranged as a set of functions with unspecified connectivity between them or according to one or more forwarding graphs.
+
+**VNFFGD:** A VNF Forwarding Graph Descriptor (VNFFGD) describes a topology of the NS or a portion of the NS, by referencing a pool of connection points and service access points, the descriptors of its constituent VNFs, PNFs and of the VLs that connect them. 
 
 
 
