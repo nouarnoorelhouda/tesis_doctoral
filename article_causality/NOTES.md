@@ -172,6 +172,28 @@ managerial components differ from each other.
 
 **VNFFGD:** A VNF Forwarding Graph Descriptor (VNFFGD) describes a topology of the NS or a portion of the NS, by referencing a pool of connection points and service access points, the descriptors of its constituent VNFs, PNFs and of the VLs that connect them. 
 
+## 08/April/2020
+Day off
 
+## 09/April/2020
 
+### Network service metrics [source](https://www.etsi.org/deliver/etsi_gs/NFV-INF/001_099/010/01.01.01_60/gs_NFV-INF010v010101p.pdf)
 
+| **Service Metric Category** | **Speed** | **Accuracy** | **Reliability**| 
+| ------------- |:-------------:| :-------------:| :-------------:| 
+| Resource Allocation, Configuration and Setup | VM provisioning latency | VM Placement Policy Compliance | VM Provisioning Reliabiility  VM Dead-on-Arrival (DOA) Ratio |
+| VirtualMachine operation   | VM Stall (event duration and frequency), VM Scheduling Latency  |  VM Clock Error  | VM Premature Release Ratio |
+| Virtual Network Establishment | VN Provisioning Latency | VN Diversity Compliance | VN Provisioning Reliability |
+| Virtual Network operation | Packet Delay, Packet Delay Variation (Jitter) Delivered Throughput | Packet Loss Ratio | Network Outage |
+
+### Definitions 
+
+**Packet delay:** The incremental user service latency introduced by communications between a VNF's VNFCs, which impacts the service latency and quality of service enjoyed by end users. A key input parameter for any packet transfer metric is the offered load during the measurement
+
+**Packet delay variation (jitter):** Derived metric that characterizes the incremental user service delay variation introduced by instability in communications latency between VNFCs within a VNF, which impacts the service latency and quality of service enjoyed by end users. 
+
+**Delivered Throughput:**  Derived metric from the offered load input parameter and other packet transfer performance metrics (loss, delay) measured at that load to characterize the actual capacity of communications between a VNF's VNFCs, and which impacts the quality of service enjoyed by end users 
+
+**Packet loss ratio:** Impacts end user service latency, reliability and quality because lost packets shall be detected, and mitigated via retry, retransmission or concealment, which impacts the service latency and quality of service enjoyed by end users. Lost packets should be assessed at measurement points near the ingress and egress of the network being measured. Again, a key input parameter for any packet transfer metric is the offered load during the measurement
+
+**Network outage:** Loss of virtual network connectivity directly impacts the service latency, quality and availability experienced by end users. Network impairment episodes that persist longer than the VNF's Maximum Acceptable Network Transient Time parameter will prompt highly available VNFs to automatically initiate service recovery actions, up to and including VNF disaster recovery actions. 
