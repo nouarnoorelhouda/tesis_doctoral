@@ -197,3 +197,14 @@ Day off
 **Packet loss ratio:** Impacts end user service latency, reliability and quality because lost packets shall be detected, and mitigated via retry, retransmission or concealment, which impacts the service latency and quality of service enjoyed by end users. Lost packets should be assessed at measurement points near the ingress and egress of the network being measured. Again, a key input parameter for any packet transfer metric is the offered load during the measurement
 
 **Network outage:** Loss of virtual network connectivity directly impacts the service latency, quality and availability experienced by end users. Network impairment episodes that persist longer than the VNF's Maximum Acceptable Network Transient Time parameter will prompt highly available VNFs to automatically initiate service recovery actions, up to and including VNF disaster recovery actions. 
+
+## 10/April/2020 - 21/April/2020
+Coding
+
+## 22/April/2020
+
+### Definitions 
+**Network Functions Virtualisation Orchestrator (NFVO): ** Functional block that manages the Network Service (NS) lifecycle and coordinates the management of NS lifecycle, VNF lifecycle (supported by the VNFM) and NFVI resources (supported by the VIM) to ensure an optimized allocation of the necessary resources and connectivity [source](https://www.etsi.org/deliver/etsi_gs/NFV/001_099/003/01.04.01_60/gs_NFV003v010401p.pdf)
+
+
+
