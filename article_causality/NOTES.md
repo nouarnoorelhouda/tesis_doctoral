@@ -206,5 +206,90 @@ Coding
 ### Definitions 
 **Network Functions Virtualisation Orchestrator (NFVO): ** Functional block that manages the Network Service (NS) lifecycle and coordinates the management of NS lifecycle, VNF lifecycle (supported by the VNFM) and NFVI resources (supported by the VIM) to ensure an optimized allocation of the necessary resources and connectivity [source](https://www.etsi.org/deliver/etsi_gs/NFV/001_099/003/01.04.01_60/gs_NFV003v010401p.pdf)
 
+## 23/April - 03 May
+Coding
 
+## 04/May/2020
+
+### Main NSO characteristics:
+
+- Characteristics [source](https://www.sciencedirect.com/science/article/abs/pii/S0140366418309502):
+	- **High-level vision of the Network Service:**
+		- Enables an overview of all involved domains: technological and administrative.
+	 **Smart services deployment and provisioning:**
+		- These are related to in-deep knowledge about the services, what enable better make decisions.
+	**Single and multi-domain environment support:**
+		- Provide deployment of end-to-end service independently of geographical location
+	**Proper interaction with different MANO and non-MANO elements:**
+		- Leads to better-executed workflows
+	**Fulfilling new market opportunities:**
+		- Offer enhanced services and reduce OPEX
+
+## 05/May/2020
+Writing
+		
+## 06/May/2020
+###VNF instance scaling flows [source: pag. 117-120](https://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf)
+
+VNF instance scaling is often the result of a service quality threshold being crossed - whether because service quality is no longer acceptable, requiring expanding capacity or because service quality and utilization is such that capacity can be contracted without affecting quality delivered.
+
+The sources can be: VNF, VNF Manager, VIM, EM, OSS/BSS, manual change.
+
+There are three types of use cases:
+	- **Auto scaling:** The NF Manager monitors the state of a VNF instance and triggers the scaling operation when certain conditions are met. For monitoring a VNF instance's state, it can for instance track infrastructure-level and/or VNF-level events.
+	- **On-demand scaling:** A VNF instance or its EM monitor the state of a VNF instance and trigger a scaling operation through explicit request to the VNF Manager.
+	- **Scaling based on management request:**  The scaling request is triggered by some sender (OSS/BSS or operator) towards VNFM via the NFVO.
+
+The following are the actions that trigger a scaling operation:
+	- configuration changes to the VM (scale up, e.g. add CPU or memory)
+	- Add a new VDU instance (scale out)
+	- Shut down and remove instances (scale in); 
+	- Release resources from existing instances (scale down);
+	- Increase available network capacity; 
+	- Provide increased bandwidth (or other network changes). 
+
+The flow is represented by the following image:
+
+![alt text](images/fig_4_vnf_scalation.png "Composite text")
+
+The main steps for VNF scalation are as follows:
+
+1. The NFVO receives the scaling request from the sender, e.g. OSS using the operation Scale VNF of the VNF Lifecycle Management interface.
+2. The NFVO receives the scaling request from the sender, e.g. OSS using the operation Scale VNF of the VNF Lifecycle Management interface.
+3. NFVO finds the VNF Manager relevant for this VNF type.
+4. Optionally, NFVO runs a feasibility check of the VNF scaling request to reserve resources before doing the actual scaling
+5. The NFVO sends the scaling request to the VNF Manager, with the scaling data and, if step 4 has been done, the reservation information using the operation Scale VNF of the VNF Lifecycle Management interface.
+6. The VNF Manager executes any needed preparation work: request validation, parameter validation. This might include modifying/complementing the input scaling data with VNF lifecycle specific constraints. If step 4 was done then the VNFM will skip step 6.
+7. The VNF Manager calls the NFVO for resource change using the operation Allocate Resource or Update Resource or Scale Resource of the Virtualised Resources Management interface.
+8. NFVO requests from VIM allocation of changed resources (compute, storage and network) needed for the scaling request using the operations Allocate Resource or Update Resource or Scale Resource of the Virtualised Resources Management interface.
+9. VIM modifies as needed the internal connectivity network.
+10. VIM creates and starts the needed new compute (VMs) and storage resources and attaches new instantiated VMs to internal connectivity network.
+11. Acknowledgement of completion of resource change back to NFVO.
+12. NFVO acknowledges the completion of the resource change back to VNF Manager.
+13. The VNF Manager configures the scaled VNF as necessary using the add/create/set config object operations of the VNF configuration interface.
+14. VNF Manager acknowledges the end of the scaling request back to the NFVO.
+15. The NFVO acknowledges the end of the scaling request back to the requester.
+
+Note: In case the VNF Manager is issuing the scaling request, steps 1 to 3 of this flow and steps 1 to 3 of the check feasibility flow will be skipped and step 4 of the feasibility flow will be replaced by an (optional) request from the VNF Manager to the NFVO to grant the scaling request and optionally return the reserved resources information, using the VNF lifecycle operation granting interface. Steps 5 and 6 of this flow will also be skipped in this case.
+
+###NS Lifecycle Operation Granting interface [source, pag. 14-15](https://docbox.etsi.org/ISG/NFV/Open/Publications_pdf/Specs-Reports/NFV-IFA%20030v3.3.1%20-%20GS%20-%20Multi%20Domain%20MANO%20-%20spec.pdf)
+
+This operation allows NFVO-N to request a grant for authorization of a NS lifecycle operation. This interface supports the following use case:
+
+NFVO-C can approve or reject a request based on dependencies between the nested NS and the entities (NSs or VNFs) in the administrative domain of NFVO-C. 
+
+There are two types of Messages: 
+- **GrantNSLifecycleOperationRequest**
+- **GrantNSLifecycleOperationResponse**
+
+The parameter of the messages are the following
+
+Parameter | Cardinality | Content | Description
+--- | --- | ---| ----
+nsInstanceId | 1 | Identifier | Identifier of the NS instance which this grant request is related to.
+nsdId | 1 | Identifier | Identifier of the NSD that defines the NS for which the LCM operation is to be granted.
+lifecycleOperation  | 1 | Enum | The lifecycle management operation for which granting is requested. Permitted values are: ScaleNS, TerminateNS, HealNS. 
+additionalParam | 0..N | KeyValuePair | Additional parameters passed byNFVO-N, specific to the NS and the LCM operation. 
+
+Note: The NS LCM operations InstantiateNS,CreateNsIdentifier, DeleteNsIdentifier and QueryNs can be executed by NFVO-N without requesting granting. 
 
