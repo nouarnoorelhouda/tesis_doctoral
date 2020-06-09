@@ -241,12 +241,12 @@ There are three types of use cases:
 	- **Scaling based on management request:**  The scaling request is triggered by some sender (OSS/BSS or operator) towards VNFM via the NFVO.
 
 The following are the actions that trigger a scaling operation:
-	- configuration changes to the VM (scale up, e.g. add CPU or memory)
-	- Add a new VDU instance (scale out)
-	- Shut down and remove instances (scale in); 
-	- Release resources from existing instances (scale down);
-	- Increase available network capacity; 
-	- Provide increased bandwidth (or other network changes). 
+1. configuration changes to the VM (scale up, e.g. add CPU or memory)
+2. Add a new VDU instance (scale out)
+3. Shut down and remove instances (scale in); 
+4. Release resources from existing instances (scale down);
+5. Increase available network capacity; 
+6. Provide increased bandwidth (or other network changes). 
 
 The flow is represented by the following image:
 
@@ -293,3 +293,35 @@ additionalParam | 0..N | KeyValuePair | Additional parameters passed byNFVO-N, s
 
 Note: The NS LCM operations InstantiateNS,CreateNsIdentifier, DeleteNsIdentifier and QueryNs can be executed by NFVO-N without requesting granting. 
 
+## 11/May/2020
+
+### VNFFG Descriptor[source pag 28,29](https://docbox.etsi.org/ISG/NFV/Open/Publications_pdf/Specs-Reports/NFV-IFA%20014v3.3.1%20-%20GS%20-%20Network%20Service%20Templates%20Spec.pdf)
+
+The Vnffgd information element specifies a topology of connectivity of an NS and optionally forwarding rules applicable to the traffic conveyed over this topology. 
+
+Attribute | Cardinality | Content | Description
+--- | --- | ---| ----
+vnffgdId | 1 | Identifier | Identifier of this Vnffgd information element. It uniquely identifies a VNFFGD.
+vnfProfileId | 1..N |  Identifier (Reference to VnfProfile) | References the VnfProfile of a constituent VNF. 
+pnfProfileId | 0..N | Identifier (Reference to PnfProfile) | References the PnfProfile of a constituent PNF.
+nestedNsProfileId | 0..N | Identifier (Reference to NsProfile) | References the NsProfile of a nestedNS.
+virtualLinkProfileId | 1..N | Identifier (Reference to NsVirtualLinkProfile) | References the Virtual Link Profile of a constituent VL. 
+nfpPositionElement | 1..N | NfpPositionElement | NfpPositionElement associated with one of the constituent VNF Profile, PNF Profile or NS Profile of a nested NS.
+nfpd | 0..N | Nfpd | The network forwarding path associated to the VNFFG
+
+The Nfpd information element associates traffic flow criteria to a list of descriptors associated to the connection points and service access points to be visited by traffic flows matching these criteria.
+
+Attribute | Cardinality | Content | Description
+--- | --- | ---| ----
+nfpdId | 1 | Identifier | Identifies this nfpd information element within a VNFFGD.
+nfpRule | 0..1 | Rule | Provides an NFP classification and selection rule. The rule may be expressed as a criteria constructed out of atomic assertions linked by Boolean operators AND, OR and NOT. 
+nfpPositionDesc | 1..N | NfpPositionDesc | Describes a position in the NFP in terms of one or more CPDs and SAPDs and rules for distributing the traffic among CP and SAP instances created from the CPDs and SAPDs.
+
+The NfpPositionDesc information element references one or more CPDs or SAPDs and provides rules on how to route traffic flows among CP or SAP instances instantiated from to these descriptors
+
+Attribute | Cardinality | Content | Description
+--- | --- | ---| ----
+nfpPositionDescId | 1 | Identifier | Identifier of this NfpPositionDesc element
+nfpPositionElementId | 1..N | Identifier (Reference to NfpPositionElement) | References one or a pair of CPDs or SAPDs.
+forwardingBehaviour | 0..1 | Enum | Specifies a rule to apply to forward traffic to CP or SAP instances corresponding to the referenced CP profile(s). The minimum list of rules to be supported shall include: ALL = Traffic flows shall be forwarded simultaneously to all CP or SAP instances created from the referenced CP profile(s). LB = Traffic flows shall be forwarded to one CP or SAP instance created from the referenced CP profile(s) selected based on a load-balancing algorithm.
+forwardingBehaviourInputParameters | 0..1 | Not Specified  | Provides input parameters to configure the forwarding behaviour (e.g. identifies a load balancing algorithm). 
