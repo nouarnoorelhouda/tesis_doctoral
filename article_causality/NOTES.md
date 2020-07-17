@@ -255,7 +255,7 @@ The flow is represented by the following image:
 The main steps for VNF scalation are as follows:
 
 1. The NFVO receives the scaling request from the sender, e.g. OSS using the operation Scale VNF of the VNF Lifecycle Management interface.
-2. The NFVO receives the scaling request from the sender, e.g. OSS using the operation Scale VNF of the VNF Lifecycle Management interface.
+2. The NFVO validates the request for policy conformance. 
 3. NFVO finds the VNF Manager relevant for this VNF type.
 4. Optionally, NFVO runs a feasibility check of the VNF scaling request to reserve resources before doing the actual scaling
 5. The NFVO sends the scaling request to the VNF Manager, with the scaling data and, if step 4 has been done, the reservation information using the operation Scale VNF of the VNF Lifecycle Management interface.
@@ -325,3 +325,32 @@ nfpPositionDescId | 1 | Identifier | Identifier of this NfpPositionDesc element
 nfpPositionElementId | 1..N | Identifier (Reference to NfpPositionElement) | References one or a pair of CPDs or SAPDs.
 forwardingBehaviour | 0..1 | Enum | Specifies a rule to apply to forward traffic to CP or SAP instances corresponding to the referenced CP profile(s). The minimum list of rules to be supported shall include: ALL = Traffic flows shall be forwarded simultaneously to all CP or SAP instances created from the referenced CP profile(s). LB = Traffic flows shall be forwarded to one CP or SAP instance created from the referenced CP profile(s) selected based on a load-balancing algorithm.
 forwardingBehaviourInputParameters | 0..1 | Not Specified  | Provides input parameters to configure the forwarding behaviour (e.g. identifies a load balancing algorithm). 
+
+##Friday, 17. July 2020
+
+### Network Service Scaling Out [source 141-142](https://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf)
+
+NFVO receives a request to scale in a Network Service instance. This request might come from an OSS, receiving an order for Network Service instance scaling in.
+
+![alt text](images/fig_5_ns_scaling_out.png "NS Scaling out")
+
+The main steps for Network Service scaling in are: 
+1. The Sender requests the NS to be scaled in to a new deployment flavour which is already present in the preloaded NSD. 
+2. NFVO validates the request, both validity of request (including validating that the sender is authorized to issue this request) and validation of the parameters passed for technical correctness and policy conformance. 
+3. (Optional) Check feasibility: 
+	1. NFVO would check feasibility of scaling the relevant member VNFs to reflect the new flavour. 
+	2. Each VNF Manager would process this request and determine if the VNF can be scaled out to the new
+flavour. 
+	3. VNF Manager(s) returns the result of the feasibility check on the VNF scaling out.
+4. Scaling-out a NS involves scaling-out its constituent VNFs. It is foreseen that a VNF can be scale-out in two different ways either by allocating more resources to VNF instance or by instantiating a new VNF instance. It is foreseen to have these preferences documented as scaling mechanism in related VNFDs. On receiving the scale-out request NFVO will identify, based on related NSD, the VNF instance(s) needed to be scale-out and the related VNF scaling mechanism. Depending on which scaling mechanism to perform, NFVO will either execute step 5 or step 6 or even both. The new VNF instance will be created (Step 6) in case the existing VNF Instance has already scaled-out to its maximum capabilities, e.g. due to their its ability of automatic scaling.
+5. VNF instance scaling flow as provided in clause B.4.
+6. VNF instantiation flow as provided in clause B.3. 
+7. The NFVO would request VIM to allocate the changed resources: 
+    1. NFVO would request VIM to allocate the changed resources (such as interconnectivity between VNFs required by the new deployment flavour as mandated by the VNFFGDs and VLDs).
+    2. The VIM would allocate the interconnectivity accordingly. 
+    3. VIM would return the result of the operation to the NFVO. 
+8. The NFVO acknowledges the end of the scaling request back to the requester. 
+  
+### Network Lifecycle Change Notification [source 70](https://www.etsi.org/deliver/etsi_gs/NFV-IFA/001_099/013/02.01.01_60/gs_NFV-IFA013v020101p.pdf)
+
+This notification informs the receiver of changes in the NS lifecycle. The support of the notification is mandatory. (For simplification purposes we don't show it) 
