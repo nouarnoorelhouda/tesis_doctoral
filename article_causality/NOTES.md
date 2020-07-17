@@ -326,7 +326,7 @@ nfpPositionElementId | 1..N | Identifier (Reference to NfpPositionElement) | Ref
 forwardingBehaviour | 0..1 | Enum | Specifies a rule to apply to forward traffic to CP or SAP instances corresponding to the referenced CP profile(s). The minimum list of rules to be supported shall include: ALL = Traffic flows shall be forwarded simultaneously to all CP or SAP instances created from the referenced CP profile(s). LB = Traffic flows shall be forwarded to one CP or SAP instance created from the referenced CP profile(s) selected based on a load-balancing algorithm.
 forwardingBehaviourInputParameters | 0..1 | Not Specified  | Provides input parameters to configure the forwarding behaviour (e.g. identifies a load balancing algorithm). 
 
-##Friday, 17. July 2020
+## Friday, 17. July 2020
 
 ### Network Service Scaling Out [source 141-142](https://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf)
 
