@@ -139,3 +139,33 @@ One way writers typically link phrases toghether is to used the -*ing* form of a
 | Incorrect      | Correct |
 | ----------- | ----------- |
 | Using automatic translation software (e.g. Google Translate, Babelfish, and Systran) can considerably ease the work of researchers when they need to translate docments *thus saving* them money (for example the fee they might have otherwise had to pay to a professional translator) and *increasing* the amount of time they have to spend in the laboratory rather than at the PC. | Using automatic translation software (e.g. Google Translate, Babelfish, and Systran) can considerably ease the work of researchers when they need to translate documents. *Such software saves* them money, for example the fee they might have otherwise had to pay to a professional translator. It *also increases* the amount of time they have to spend in the laboratory rather than at the PC. |
+
+## Monday, 20. July 2020 
+
+### Mathematics and computer science citations [source pag. 139](https://www.amazon.com/gp/product/B07H9HF96S)
+
+Papers in mathematics and computer science use one of two citation styles. The first places an alphabetical reference list at the end of the paper. References in the text are given by bracketed numbers. The first reference might be [23], referring to the twenty-third item in the alphabetical list. The last reference in the article might be [2]. Specific pages are rarely mentioned, but if you to need, use this form: [23, p. 14]. Please use the set of positive integers.
+
+A second system, based on the Bulletin of the American Mathematical
+Society, is often used by advanced mathematicians for publishable research. It, too, has an alphabetical reference list (aslightly different one), but what’s unusual arethetext references.Instead of bracketednumbers,thisstyleuses abbreviations, based on the author’s last name and date of publication. So an article by Hofbauer and Sandholm, published in Econometrica, volume 70 (2002), would be cited in the text assomething like [HoSa02] or perhaps [HS02] or maybe just [HS]. 
+
+Article titles and book chapters are italicized. Capitalize only the first
+word, the first word after a colon, and all proper nouns: A. R. Conn and P. L. Toint, An algorithm using quadratic interpolation for unconstrained derivative free optimization.
+
+Book titles are capitalized normally and italicized: Nonlinear Optimization and Applications.
+
+Journal titles are abbreviated but not italicized:
+1. Ann. of Math.
+2. Bull. Amer. Math. Soc.
+
+Publications by the same author are listed in the order of publication,
+beginning with the earliest. Use three em dashes to repeat an author’s
+name, but do so only if all the authors are the same. For example:
+
+1. [32] S. Kihara, On an elliptic curve over Q(t) of rank ≥ 14, Proc. Japan
+Acad. Ser. A Math. Science. 77 (2001), pp. 50–51 MR
+2002a:11057.
+2. [33] ———, On an infinite family of elliptic curves with rank ≥ 14
+over Q, Proc. Japan Acad. Ser. A Math. Science. 73 (1997), p. 32
+MR 98d:11059.
+3. [34] S. Kihara and M. Kenku, Elliptic Curves . . .
