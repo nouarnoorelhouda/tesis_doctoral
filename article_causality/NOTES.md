@@ -354,3 +354,5 @@ flavour.
 ### Network Lifecycle Change Notification [source 70](https://www.etsi.org/deliver/etsi_gs/NFV-IFA/001_099/013/02.01.01_60/gs_NFV-IFA013v020101p.pdf)
 
 This notification informs the receiver of changes in the NS lifecycle. The support of the notification is mandatory. (For simplification purposes we don't show it) 
+
+### https://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf 118
